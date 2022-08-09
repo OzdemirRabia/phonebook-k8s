@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: phonebook
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: phonebook-service
+            port:
+              number: 80
+      - path: /result
+        pathType: Prefix
+        backend:
+          service:
+            name: result-service
+            port:
+              number: 80
